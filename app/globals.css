@@ -3,71 +3,174 @@
 @tailwind utilities;
 
 :root {
+  /* Legacy colors */
   --poker-green: #1a4d2e;
   --poker-felt: #0f3d26;
   --poker-light-green: #2d7a4f;
+
+  /* Casino theme colors */
+  --casino-dark-bg: #0a0a0a;
+  --casino-dark-bg-light: #1a1a1a;
+  --casino-felt-dark: #0a4523;
+  --casino-felt-light: #0d5c2f;
+  --casino-gold: #d4af37;
+  --casino-gold-dark: #b8941f;
+  --casino-gold-light: #f0d35f;
+  --casino-card-dark: #0d0d0d;
+  --casino-card-light: #1a1a1a;
 }
 
+/* Page background — dark radial gradient */
 .poker-table {
-  background: linear-gradient(
-    135deg,
-    var(--poker-green) 0%,
-    var(--poker-felt) 100%
+  background: radial-gradient(
+    ellipse at center,
+    var(--casino-dark-bg-light) 0%,
+    var(--casino-dark-bg) 100%
   );
   min-height: 100vh;
+  position: relative;
 }
 
-/* Custom scrollbar */
+/* Subtle felt texture overlay */
+.poker-table::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(13, 92, 47, 0.03) 2px,
+      rgba(13, 92, 47, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(13, 92, 47, 0.03) 2px,
+      rgba(13, 92, 47, 0.03) 4px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.poker-table > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Casino utility classes ── */
+
+/* Dark card component (replaces white cards) */
+.casino-card {
+  background: radial-gradient(
+    ellipse at top,
+    var(--casino-card-light) 0%,
+    var(--casino-card-dark) 100%
+  );
+  border: 2px solid var(--casino-gold);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(212, 175, 55, 0.2);
+}
+
+/* Green felt surface (for action panels) */
+.felt-surface {
+  background: radial-gradient(
+    ellipse at center,
+    var(--casino-felt-light) 0%,
+    var(--casino-felt-dark) 100%
+  );
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Gold text with depth */
+.gold-text {
+  color: var(--casino-gold);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* White text with depth */
+.casino-text-white {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Custom scrollbar ── */
+
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--casino-dark-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--casino-gold-dark);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--casino-gold);
 }
 
-/* Card animation */
-@keyframes cardDeal {
+/* ── Animations ── */
+
+/* Card deal — fade in with slight 3D flip */
+@keyframes cardDealCasino {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-20px) rotateY(90deg);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) rotateY(0deg);
   }
 }
 
 .card-enter {
-  animation: cardDeal 0.3s ease-out;
+  animation: cardDealCasino 0.5s ease-out;
 }
 
-/* Chip animation */
-@keyframes chipMove {
+/* Chip amount — fade in and scale */
+@keyframes chipStack {
   from {
     opacity: 0;
-    transform: scale(0.8);
+    transform: scale(0.8) translateY(10px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
   }
 }
 
 .chip-update {
-  animation: chipMove 0.2s ease-out;
+  animation: chipStack 0.3s ease-out;
 }
 
-/* Button hover effects */
+/* Gold glow pulse for pot amounts */
+@keyframes goldGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 1px 2px rgba(0, 0, 0, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.4), 0 1px 2px rgba(0, 0, 0, 0.8);
+  }
+}
+
+.gold-glow {
+  animation: goldGlow 2s ease-in-out infinite;
+}
+
+/* ── Button defaults ── */
+
 button {
   transition: all 0.2s ease;
 }

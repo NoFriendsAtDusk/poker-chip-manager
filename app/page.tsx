@@ -51,10 +51,10 @@ export default function SetupScreen() {
             <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-green-500 border-4 border-white"></div>
             <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-blue-500 border-4 border-white"></div>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+          <h1 className="text-2xl sm:text-3xl font-bold casino-text-white mb-2">
             トランプだけで遊べる！
           </h1>
-          <h2 className="text-xl sm:text-2xl text-white">
+          <h2 className="text-xl sm:text-2xl gold-text">
             ポーカーチップアプリ
           </h2>
           <div className="flex justify-center gap-2 mt-4 text-2xl">
@@ -69,27 +69,27 @@ export default function SetupScreen() {
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-8">
           <Link
             href="/how-to-play"
-            className="px-6 py-2 bg-white text-green-800 rounded-lg hover:bg-gray-100 text-center"
+            className="px-6 py-2 casino-card gold-text font-semibold rounded-lg hover:bg-casino-card-light transition-all text-center"
           >
             遊び方ガイド
           </Link>
           <Link
             href="/rules"
-            className="px-6 py-2 bg-white text-green-800 rounded-lg hover:bg-gray-100 text-center"
+            className="px-6 py-2 casino-card gold-text font-semibold rounded-lg hover:bg-casino-card-light transition-all text-center"
           >
             ルール解説
           </Link>
           <Link
             href="/faq"
-            className="px-6 py-2 bg-white text-green-800 rounded-lg hover:bg-gray-100 text-center"
+            className="px-6 py-2 casino-card gold-text font-semibold rounded-lg hover:bg-casino-card-light transition-all text-center"
           >
             このアプリについて
           </Link>
         </div>
 
         {/* Game Settings Form */}
-        <div className="bg-white rounded-lg shadow-lg p-4 sm:p-8">
-          <h2 className="text-2xl font-bold text-green-800 mb-6 flex items-center gap-2">
+        <div className="casino-card rounded-lg shadow-2xl p-4 sm:p-8">
+          <h2 className="text-2xl font-bold gold-text mb-6 flex items-center gap-2">
             <span>♦️</span>
             ゲーム設定
             <span>♠️</span>
@@ -98,7 +98,7 @@ export default function SetupScreen() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Player Count */}
             <div>
-              <label className="block text-green-800 font-semibold mb-2">
+              <label className="block text-white font-semibold mb-2">
                 プレイ人数
               </label>
               <input
@@ -107,14 +107,14 @@ export default function SetupScreen() {
                 max="10"
                 value={formData.playerCount}
                 onChange={(e) => handlePlayerCountChange(Number(e.target.value))}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
               />
             </div>
 
             {/* Player Names */}
             {formData.playerNames.map((name, index) => (
               <div key={index}>
-                <label className="block text-green-800 font-semibold mb-2">
+                <label className="block text-white font-semibold mb-2">
                   プレイヤー {index + 1} の名前
                 </label>
                 <input
@@ -122,14 +122,14 @@ export default function SetupScreen() {
                   value={name}
                   onChange={(e) => handlePlayerNameChange(index, e.target.value)}
                   placeholder={`Player ${index + 1}`}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
                 />
               </div>
             ))}
 
             {/* Bet Unit */}
             <div>
-              <label className="block text-green-800 font-semibold mb-2">
+              <label className="block text-white font-semibold mb-2">
                 ベット単位
               </label>
               <input
@@ -137,13 +137,13 @@ export default function SetupScreen() {
                 min="1"
                 value={formData.betUnit}
                 onChange={(e) => setFormData({ ...formData, betUnit: Number(e.target.value) })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
               />
             </div>
 
             {/* Starting Chips */}
             <div>
-              <label className="block text-green-800 font-semibold mb-2">
+              <label className="block text-white font-semibold mb-2">
                 初期チップ
               </label>
               <input
@@ -152,7 +152,7 @@ export default function SetupScreen() {
                 step="100"
                 value={formData.startingChips}
                 onChange={(e) => setFormData({ ...formData, startingChips: Number(e.target.value) })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
               />
             </div>
 
@@ -163,9 +163,9 @@ export default function SetupScreen() {
                   type="checkbox"
                   checked={formData.blindsEnabled}
                   onChange={(e) => setFormData({ ...formData, blindsEnabled: e.target.checked })}
-                  className="w-5 h-5 text-green-600 rounded focus:ring-green-500"
+                  className="w-5 h-5 accent-casino-gold rounded focus:ring-casino-gold"
                 />
-                <span className="text-green-800 font-semibold">ブラインドあり</span>
+                <span className="text-white font-semibold">ブラインドあり</span>
               </label>
             </div>
 
@@ -173,7 +173,7 @@ export default function SetupScreen() {
             {formData.blindsEnabled && (
               <>
                 <div>
-                  <label className="block text-green-800 font-semibold mb-2">
+                  <label className="block text-white font-semibold mb-2">
                     Small Blind
                   </label>
                   <input
@@ -181,12 +181,12 @@ export default function SetupScreen() {
                     min="1"
                     value={formData.smallBlind}
                     onChange={(e) => setFormData({ ...formData, smallBlind: Number(e.target.value) })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-green-800 font-semibold mb-2">
+                  <label className="block text-white font-semibold mb-2">
                     Big Blind
                   </label>
                   <input
@@ -194,7 +194,7 @@ export default function SetupScreen() {
                     min="1"
                     value={formData.bigBlind}
                     onChange={(e) => setFormData({ ...formData, bigBlind: Number(e.target.value) })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
                   />
                 </div>
 
@@ -204,9 +204,9 @@ export default function SetupScreen() {
                       type="checkbox"
                       checked={formData.autoIncreaseBlind}
                       onChange={(e) => setFormData({ ...formData, autoIncreaseBlind: e.target.checked })}
-                      className="w-5 h-5 text-green-600 rounded focus:ring-green-500"
+                      className="w-5 h-5 accent-casino-gold rounded focus:ring-casino-gold"
                     />
-                    <span className="text-green-800 font-semibold">ブラインド自動増加</span>
+                    <span className="text-white font-semibold">ブラインド自動増加</span>
                   </label>
                 </div>
               </>
@@ -215,7 +215,7 @@ export default function SetupScreen() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full py-4 bg-blue-600 text-white text-xl font-bold rounded-lg hover:bg-blue-700 transition-colors"
+              className="w-full py-4 bg-gradient-to-b from-casino-gold to-casino-gold-dark text-casino-dark-bg text-xl font-bold rounded-lg hover:from-casino-gold-light hover:to-casino-gold shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all"
             >
               ゲーム開始
             </button>
@@ -223,7 +223,7 @@ export default function SetupScreen() {
         </div>
 
         {/* Disclaimer */}
-        <div className="mt-8 text-center text-white text-sm bg-green-900 bg-opacity-50 p-4 rounded-lg">
+        <div className="mt-8 text-center text-white text-sm felt-surface p-4 rounded-lg border border-casino-gold-dark">
           <p>
             本アプリは、ポーカーのゲーム進行を補助する目的でチップ計算を管理するツールです。
             金銭や換金可能な物品を賭ける行為は法律で禁止されており、本アプリはこれを一切認めません。
@@ -232,16 +232,16 @@ export default function SetupScreen() {
 
         {/* Footer Links */}
         <div className="mt-6 flex flex-wrap justify-center gap-4 text-white text-sm">
-          <Link href="/legal/privacy" className="hover:underline">プライバシーポリシー</Link>
-          <Link href="/legal/terms" className="hover:underline">利用規約</Link>
-          <Link href="/legal/specified-commercial-transactions" className="hover:underline">
+          <Link href="/legal/privacy" className="hover:text-casino-gold-light hover:underline transition-colors">プライバシーポリシー</Link>
+          <Link href="/legal/terms" className="hover:text-casino-gold-light hover:underline transition-colors">利用規約</Link>
+          <Link href="/legal/specified-commercial-transactions" className="hover:text-casino-gold-light hover:underline transition-colors">
             特定商取引法に関する表示
           </Link>
         </div>
 
         {/* Contact */}
         <div className="mt-4 text-center text-white text-sm">
-          <Link href="/contact" className="hover:underline">お問い合わせ</Link>
+          <Link href="/contact" className="hover:text-casino-gold-light hover:underline transition-colors">お問い合わせ</Link>
         </div>
 
         {/* Copyright */}

@@ -91,22 +91,22 @@ export default function ShowdownPanel({ gameState }: ShowdownPanelProps) {
     : `サイドポット: ${formatChips(currentResolution.pot.amount)}`;
 
   return (
-    <div className="bg-green-900 rounded-lg shadow-lg p-4 sm:p-6 mb-4 sm:mb-6">
-      <h3 className="text-white text-xl sm:text-2xl font-bold mb-4">
+    <div className="felt-surface rounded-lg shadow-2xl p-4 sm:p-6 mb-4 sm:mb-6 border-2 border-casino-gold">
+      <h3 className="gold-text text-xl sm:text-2xl font-bold mb-4">
         勝者を選択してください
       </h3>
 
       {potsNeedingSelection.length > 1 && (
-        <div className="text-white text-sm mb-2">
+        <div className="casino-text-white text-sm mb-2">
           ポット {currentPotIndex + 1} / {potsNeedingSelection.length}
         </div>
       )}
 
-      <div className="bg-black bg-opacity-30 rounded-lg p-3 sm:p-4 mb-4">
-        <p className="text-white font-semibold mb-2">
+      <div className="bg-casino-dark-bg/80 border border-casino-gold-dark rounded-lg p-3 sm:p-4 mb-4">
+        <p className="casino-text-white font-semibold mb-2">
           {potLabel}
         </p>
-        <p className="text-white text-sm">
+        <p className="casino-text-white text-sm">
           対象プレイヤーから勝者を選択 (複数選択可):
         </p>
       </div>
@@ -117,10 +117,10 @@ export default function ShowdownPanel({ gameState }: ShowdownPanelProps) {
             key={player.id}
             onClick={() => toggleWinner(player.id)}
             aria-pressed={selectedWinners.includes(player.id)}
-            className={`w-full px-4 sm:px-6 py-3 sm:py-4 text-left rounded-lg font-semibold transition-colors ${
+            className={`w-full px-4 sm:px-6 py-3 sm:py-4 text-left rounded-lg font-semibold transition-all ${
               selectedWinners.includes(player.id)
-                ? 'bg-yellow-500 text-white'
-                : 'bg-white text-gray-800 hover:bg-gray-100'
+                ? 'bg-gradient-to-b from-casino-gold to-casino-gold-dark text-casino-dark-bg border-2 border-casino-gold shadow-lg'
+                : 'bg-casino-card-light text-white border-2 border-casino-gold-dark hover:border-casino-gold hover:bg-casino-card-dark'
             }`}
           >
             {player.name}
@@ -129,14 +129,14 @@ export default function ShowdownPanel({ gameState }: ShowdownPanelProps) {
       </div>
 
       {errorMessage && (
-        <div role="alert" className="mb-3 p-2 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+        <div role="alert" className="mb-3 p-2 bg-red-900/80 border-2 border-red-600 text-red-200 rounded-lg text-sm shadow-lg">
           {errorMessage}
         </div>
       )}
 
       <button
         onClick={handleConfirm}
-        className="w-full py-3 sm:py-4 bg-blue-600 text-white text-lg sm:text-xl font-bold rounded-lg hover:bg-blue-700 transition-colors"
+        className="w-full py-3 sm:py-4 bg-gradient-to-b from-casino-gold to-casino-gold-dark text-casino-dark-bg text-lg sm:text-xl font-bold rounded-lg hover:from-casino-gold-light hover:to-casino-gold shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all"
       >
         {currentPotIndex + 1 < potsNeedingSelection.length ? '次のポットへ' : '勝者を確定'}
       </button>

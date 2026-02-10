@@ -60,7 +60,7 @@ export default function GameScreen() {
             <button
               onClick={undoLastAction}
               disabled={!canUndo}
-              className="px-4 py-2 bg-gray-500 text-white text-sm font-semibold rounded-lg hover:bg-gray-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-casino-dark-bg border-2 border-casino-gold-dark text-casino-gold text-sm font-semibold rounded-lg hover:border-casino-gold hover:bg-casino-card-light transition-all disabled:bg-casino-dark-bg disabled:border-gray-700 disabled:text-gray-600 disabled:cursor-not-allowed"
               aria-label="元に戻す"
             >
               ↩ 元に戻す
@@ -85,7 +85,7 @@ export default function GameScreen() {
 
         {/* Contact Link */}
         <div className="mt-6 sm:mt-8 text-center">
-          <a href="/" className="text-white hover:underline">
+          <a href="/" className="text-white hover:text-casino-gold-light hover:underline transition-colors">
             お問い合わせ
           </a>
         </div>
