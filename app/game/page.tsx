@@ -12,7 +12,9 @@ import GameOverPanel from '@/components/game/GameOverPanel';
 
 export default function GameScreen() {
   const router = useRouter();
-  const { gameState } = useGameStore();
+  const { gameState, undoLastAction } = useGameStore();
+  const undoHistory = useGameStore((s) => s.undoHistory);
+  const canUndo = undoHistory.length > 0;
 
   useEffect(() => {
     // Redirect to setup if no game state
@@ -51,6 +53,20 @@ export default function GameScreen() {
           bbIndex={gameState.bigBlindIndex}
           currentPlayerIndex={gameState.currentPlayerIndex}
         />
+
+        {/* Undo Button */}
+        {gameState.stage !== 'showdown' && (
+          <div className="mt-3 flex justify-end">
+            <button
+              onClick={undoLastAction}
+              disabled={!canUndo}
+              className="px-4 py-2 bg-gray-500 text-white text-sm font-semibold rounded-lg hover:bg-gray-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+              aria-label="元に戻す"
+            >
+              ↩ 元に戻す
+            </button>
+          </div>
+        )}
 
         {/* Action Panel (conditional) */}
         {gameState.stage !== 'showdown' && gameState.stage !== 'gameOver' && (
