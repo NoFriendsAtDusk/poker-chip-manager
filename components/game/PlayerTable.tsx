@@ -1,5 +1,9 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import { Player } from '@/types/game-types';
-import PlayerRow from './PlayerRow';
+import PlayerCard from './PlayerCard';
+import { staggerContainer } from '@/lib/animation-variants';
 
 interface PlayerTableProps {
   players: Player[];
@@ -17,33 +21,23 @@ export default function PlayerTable({
   currentPlayerIndex
 }: PlayerTableProps) {
   return (
-    <div className="casino-card rounded-lg shadow-2xl overflow-hidden mb-4 sm:mb-6">
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-casino-dark-bg-light border-b-2 border-casino-gold-dark">
-            <tr>
-              <th className="px-2 sm:px-4 py-3 text-left gold-text font-semibold">#</th>
-              <th className="px-2 sm:px-4 py-3 text-left gold-text font-semibold">プレイヤー</th>
-              <th className="px-2 sm:px-4 py-3 text-right gold-text font-semibold">チップ</th>
-              <th className="px-2 sm:px-4 py-3 text-right gold-text font-semibold">ベット額</th>
-              <th className="px-2 sm:px-4 py-3 text-center gold-text font-semibold">ステータス</th>
-            </tr>
-          </thead>
-          <tbody>
-            {players.map((player, index) => (
-              <PlayerRow
-                key={player.id}
-                player={player}
-                position={index + 1}
-                isSB={index === sbIndex}
-                isBB={index === bbIndex}
-                isDealer={index === dealerIndex}
-                isCurrent={index === currentPlayerIndex}
-              />
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <motion.div
+      variants={staggerContainer}
+      initial="hidden"
+      animate="visible"
+      className="mb-4 sm:mb-6"
+    >
+      {players.map((player, index) => (
+        <PlayerCard
+          key={player.id}
+          player={player}
+          position={index + 1}
+          isSB={index === sbIndex}
+          isBB={index === bbIndex}
+          isDealer={index === dealerIndex}
+          isCurrent={index === currentPlayerIndex}
+        />
+      ))}
+    </motion.div>
   );
 }

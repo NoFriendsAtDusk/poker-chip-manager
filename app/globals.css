@@ -169,6 +169,39 @@
   animation: goldGlow 2s ease-in-out infinite;
 }
 
+/* ── Current player glow ── */
+
+@keyframes currentPlayerPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.6), 0 0 35px rgba(212, 175, 55, 0.3);
+  }
+}
+
+.current-player-glow {
+  animation: currentPlayerPulse 2s ease-in-out infinite;
+}
+
+/* ── Player badge styles ── */
+
+.badge-btn {
+  @apply px-2 py-1 bg-casino-gold text-casino-dark-bg text-xs font-bold rounded shadow-md;
+}
+
+.badge-sb {
+  @apply px-2 py-1 bg-casino-dark-bg-light border border-casino-gold text-casino-gold text-xs font-bold rounded;
+}
+
+.badge-bb {
+  @apply px-2 py-1 bg-casino-dark-bg border-2 border-casino-gold text-casino-gold text-xs font-bold rounded;
+}
+
+.badge-allin {
+  @apply px-2 py-1 bg-gradient-to-b from-red-600 to-red-800 text-white text-xs font-bold rounded shadow-md animate-pulse;
+}
+
 /* ── Button defaults ── */
 
 button {
