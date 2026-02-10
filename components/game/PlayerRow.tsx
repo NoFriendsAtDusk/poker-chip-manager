@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import { Player } from '@/types/game-types';
 import { formatChips, getStatusText } from '@/lib/utils';
 
@@ -21,11 +24,14 @@ export default function PlayerRow({
   const rowClass = isCurrent
     ? 'bg-casino-felt-dark border-l-4 border-casino-gold text-white'
     : player.status === 'folded'
-    ? 'bg-casino-dark-bg opacity-50 text-gray-500'
+    ? 'bg-casino-dark-bg text-gray-500'
     : 'text-white';
 
   return (
-    <tr
+    <motion.tr
+      layout
+      animate={{ opacity: player.status === 'folded' ? 0.5 : 1 }}
+      transition={{ duration: 0.3 }}
       className={`border-b border-casino-gold-dark/30 ${rowClass}`}
       aria-current={isCurrent ? 'step' : undefined}
     >
@@ -59,6 +65,6 @@ export default function PlayerRow({
       <td className="px-2 py-2 sm:px-4 sm:py-4 text-center">
         {getStatusText(player.status)}
       </td>
-    </tr>
+    </motion.tr>
   );
 }

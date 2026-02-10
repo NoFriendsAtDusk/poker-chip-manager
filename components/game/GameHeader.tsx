@@ -1,6 +1,10 @@
+'use client';
+
+import { motion, AnimatePresence } from 'framer-motion';
 import { GameState } from '@/types/game-types';
 import { getStageText, formatChips } from '@/lib/utils';
 import { formatPotDisplay } from '@/lib/pot-calculator';
+import { stageSwap } from '@/lib/animation-variants';
 
 interface GameHeaderProps {
   gameState: GameState;
@@ -17,7 +21,18 @@ export default function GameHeader({ gameState }: GameHeaderProps) {
             ゲーム {gameNumber}
           </h1>
           <p className="text-base sm:text-lg text-white">
-            ステージ: <span className="font-semibold">{getStageText(stage)}</span>
+            ステージ:{' '}
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={stage}
+                initial={stageSwap.initial}
+                animate={stageSwap.animate}
+                exit={stageSwap.exit}
+                className="font-semibold inline-block"
+              >
+                {getStageText(stage)}
+              </motion.span>
+            </AnimatePresence>
           </p>
         </div>
 
@@ -30,9 +45,15 @@ export default function GameHeader({ gameState }: GameHeaderProps) {
             </div>
           )}
 
-          <div className="text-lg sm:text-xl font-bold gold-text gold-glow">
+          <motion.div
+            key={totalPot}
+            initial={{ scale: 1 }}
+            animate={{ scale: [1, 1.15, 1] }}
+            transition={{ duration: 0.3 }}
+            className="text-lg sm:text-xl font-bold gold-text gold-glow"
+          >
             ポット合計: {formatChips(totalPot)}
-          </div>
+          </motion.div>
 
           {pots.length > 0 && (
             <div className="text-sm text-casino-gold-light mt-1">

@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { GameState, PotWinner } from '@/types/game-types';
 import { useGameStore } from '@/store/game-store';
 import { formatChips } from '@/lib/utils';
+import { panelVariants, staggerContainer, staggerItem, buttonTap, buttonHover, errorShake } from '@/lib/animation-variants';
 
 interface ShowdownPanelProps {
   gameState: GameState;
@@ -91,7 +93,13 @@ export default function ShowdownPanel({ gameState }: ShowdownPanelProps) {
     : `サイドポット: ${formatChips(currentResolution.pot.amount)}`;
 
   return (
-    <div className="felt-surface rounded-lg shadow-2xl p-4 sm:p-6 mb-4 sm:mb-6 border-2 border-casino-gold">
+    <motion.div
+      variants={panelVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="felt-surface rounded-lg shadow-2xl p-4 sm:p-6 mb-4 sm:mb-6 border-2 border-casino-gold"
+    >
       <h3 className="gold-text text-xl sm:text-2xl font-bold mb-4">
         勝者を選択してください
       </h3>
@@ -111,10 +119,17 @@ export default function ShowdownPanel({ gameState }: ShowdownPanelProps) {
         </p>
       </div>
 
-      <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+        className="space-y-2 sm:space-y-3 mb-4 sm:mb-6"
+      >
         {currentEligiblePlayers.map(player => (
-          <button
+          <motion.button
             key={player.id}
+            variants={staggerItem}
+            whileTap={buttonTap}
             onClick={() => toggleWinner(player.id)}
             aria-pressed={selectedWinners.includes(player.id)}
             className={`w-full px-4 sm:px-6 py-3 sm:py-4 text-left rounded-lg font-semibold transition-all ${
@@ -124,22 +139,33 @@ export default function ShowdownPanel({ gameState }: ShowdownPanelProps) {
             }`}
           >
             {player.name}
-          </button>
+          </motion.button>
         ))}
-      </div>
+      </motion.div>
 
-      {errorMessage && (
-        <div role="alert" className="mb-3 p-2 bg-red-900/80 border-2 border-red-600 text-red-200 rounded-lg text-sm shadow-lg">
-          {errorMessage}
-        </div>
-      )}
+      <AnimatePresence>
+        {errorMessage && (
+          <motion.div
+            variants={errorShake}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            role="alert"
+            className="mb-3 p-2 bg-red-900/80 border-2 border-red-600 text-red-200 rounded-lg text-sm shadow-lg"
+          >
+            {errorMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <button
+      <motion.button
+        whileTap={buttonTap}
+        whileHover={buttonHover}
         onClick={handleConfirm}
         className="w-full py-3 sm:py-4 bg-gradient-to-b from-casino-gold to-casino-gold-dark text-casino-dark-bg text-lg sm:text-xl font-bold rounded-lg hover:from-casino-gold-light hover:to-casino-gold shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all"
       >
         {currentPotIndex + 1 < potsNeedingSelection.length ? '次のポットへ' : '勝者を確定'}
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   );
 }

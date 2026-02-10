@@ -2,7 +2,9 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useGameStore } from '@/store/game-store';
+import { panelVariants } from '@/lib/animation-variants';
 import GameHeader from '@/components/game/GameHeader';
 import CommunityCards from '@/components/game/CommunityCards';
 import PlayerTable from '@/components/game/PlayerTable';
@@ -41,9 +43,19 @@ export default function GameScreen() {
         <GameHeader gameState={gameState} />
 
         {/* Community Cards */}
-        {gameState.communityCards > 0 && (
-          <CommunityCards count={gameState.communityCards} />
-        )}
+        <AnimatePresence>
+          {gameState.communityCards > 0 && (
+            <motion.div
+              key="community-cards"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <CommunityCards count={gameState.communityCards} />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Player Table */}
         <PlayerTable
@@ -55,33 +67,40 @@ export default function GameScreen() {
         />
 
         {/* Undo Button */}
-        {gameState.stage !== 'showdown' && (
-          <div className="mt-3 flex justify-end">
-            <button
-              onClick={undoLastAction}
-              disabled={!canUndo}
-              className="px-4 py-2 bg-casino-dark-bg border-2 border-casino-gold-dark text-casino-gold text-sm font-semibold rounded-lg hover:border-casino-gold hover:bg-casino-card-light transition-all disabled:bg-casino-dark-bg disabled:border-gray-700 disabled:text-gray-600 disabled:cursor-not-allowed"
-              aria-label="元に戻す"
+        <AnimatePresence>
+          {gameState.stage !== 'showdown' && (
+            <motion.div
+              key="undo"
+              variants={panelVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="mt-3 flex justify-end"
             >
-              ↩ 元に戻す
-            </button>
-          </div>
-        )}
+              <button
+                onClick={undoLastAction}
+                disabled={!canUndo}
+                className="px-4 py-2 bg-casino-dark-bg border-2 border-casino-gold-dark text-casino-gold text-sm font-semibold rounded-lg hover:border-casino-gold hover:bg-casino-card-light transition-all disabled:bg-casino-dark-bg disabled:border-gray-700 disabled:text-gray-600 disabled:cursor-not-allowed"
+                aria-label="元に戻す"
+              >
+                ↩ 元に戻す
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* Action Panel (conditional) */}
-        {gameState.stage !== 'showdown' && gameState.stage !== 'gameOver' && (
-          <ActionPanel gameState={gameState} />
-        )}
-
-        {/* Showdown Panel */}
-        {gameState.stage === 'showdown' && (
-          <ShowdownPanel gameState={gameState} />
-        )}
-
-        {/* Game Over Panel */}
-        {gameState.stage === 'gameOver' && (
-          <GameOverPanel gameState={gameState} />
-        )}
+        {/* Panels — animated transitions between Action / Showdown / GameOver */}
+        <AnimatePresence mode="wait">
+          {gameState.stage !== 'showdown' && gameState.stage !== 'gameOver' && (
+            <ActionPanel key="action" gameState={gameState} />
+          )}
+          {gameState.stage === 'showdown' && (
+            <ShowdownPanel key="showdown" gameState={gameState} />
+          )}
+          {gameState.stage === 'gameOver' && (
+            <GameOverPanel key="gameOver" gameState={gameState} />
+          )}
+        </AnimatePresence>
 
         {/* Contact Link */}
         <div className="mt-6 sm:mt-8 text-center">
