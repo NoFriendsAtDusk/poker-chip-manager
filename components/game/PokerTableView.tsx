@@ -1,13 +1,16 @@
 'use client';
 
 import { useMemo } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GameState } from '@/types/game-types';
 import { calculateSeatPositions, getRadiiForPlayerCount } from '@/lib/table-layout';
 import { formatChips } from '@/lib/utils';
 import { formatPotDisplay } from '@/lib/pot-calculator';
 import { cardDeal } from '@/lib/animation-variants';
+import { getBetChips, getChipPile } from '@/lib/chip-visuals';
 import SeatPanel from './SeatPanel';
+import ChipStack from './ChipStack';
 
 interface PokerTableViewProps {
   gameState: GameState;
@@ -30,6 +33,16 @@ export default function PokerTableView({ gameState }: PokerTableViewProps) {
   const positions = useMemo(
     () => calculateSeatPositions(players.length, rx, ry),
     [players.length, rx, ry]
+  );
+
+  // Collected pot = totalPot minus current round's bets (those are shown individually)
+  const currentBetsTotal = players.reduce((sum, p) => sum + p.currentBet, 0);
+  const collectedPot = totalPot - currentBetsTotal;
+
+  // Pot chip pile — only shows chips from completed betting rounds
+  const potPileDiscs = useMemo(
+    () => getChipPile(collectedPot, 20),
+    [collectedPot]
   );
 
   return (
@@ -63,9 +76,57 @@ export default function PokerTableView({ gameState }: PokerTableViewProps) {
         />
       </div>
 
-      {/* Center content: Pot + Community Cards */}
+      {/* Bet chips — between each player and center */}
+      {players.map((player, index) => {
+        if (player.currentBet <= 0) return null;
+        const betDiscs = getBetChips(player.currentBet);
+        if (betDiscs.length === 0) return null;
+
+        // Position 40% of the way from player toward center (50%, 50%)
+        const betX = positions[index].x + (50 - positions[index].x) * 0.4;
+        const betY = positions[index].y + (50 - positions[index].y) * 0.4;
+
+        return (
+          <div
+            key={`bet-${player.id}`}
+            className="absolute z-[15]"
+            style={{
+              left: `${betX}%`,
+              top: `${betY}%`,
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            <ChipStack discs={betDiscs} size="sm" />
+          </div>
+        );
+      })}
+
+      {/* Center content: Pot pile + Pot text + Community Cards */}
       <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
-        {/* Pot display */}
+        {/* Pot chip pile (behind text) */}
+        {potPileDiscs.length > 0 && (
+          <div className="relative mb-1" style={{ width: '60px', height: '40px' }}>
+            {potPileDiscs.map((disc, i) => (
+              <Image
+                key={i}
+                src="/chip.png"
+                alt=""
+                width={22}
+                height={13}
+                className="chip-disc"
+                style={{
+                  left: `calc(50% + ${disc.offsetX}px)`,
+                  top: `calc(50% + ${disc.offsetY}px)`,
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: i,
+                }}
+                draggable={false}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Pot text */}
         <motion.div
           key={totalPot}
           initial={{ scale: 1 }}
