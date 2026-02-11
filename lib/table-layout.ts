@@ -32,11 +32,14 @@ export function calculateSeatPositions(
 /**
  * Get dynamic radii based on player count to reduce overlap on mobile.
  */
-export function getRadiiForPlayerCount(playerCount: number): {
-  rx: number;
-  ry: number;
-} {
-  if (playerCount <= 6) return { rx: 42, ry: 38 };
-  if (playerCount <= 8) return { rx: 45, ry: 42 };
-  return { rx: 48, ry: 45 };
+export function getRadiiForPlayerCount(
+  playerCount: number,
+  portrait = false
+): { rx: number; ry: number } {
+  let rx: number, ry: number;
+  if (playerCount <= 6) { rx = 42; ry = 38; }
+  else if (playerCount <= 8) { rx = 45; ry = 42; }
+  else { rx = 48; ry = 45; }
+
+  return portrait ? { rx: ry, ry: rx } : { rx, ry };
 }

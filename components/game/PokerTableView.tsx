@@ -9,6 +9,7 @@ import { formatChips } from '@/lib/utils';
 import { formatPotDisplay } from '@/lib/pot-calculator';
 import { cardDeal } from '@/lib/animation-variants';
 import { getBetChips, getChipPile } from '@/lib/chip-visuals';
+import { useIsMobile } from '@/lib/use-is-mobile';
 import SeatPanel from './SeatPanel';
 import ChipStack from './ChipStack';
 
@@ -28,7 +29,8 @@ export default function PokerTableView({ gameState }: PokerTableViewProps) {
     pots,
   } = gameState;
 
-  const { rx, ry } = getRadiiForPlayerCount(players.length);
+  const isMobile = useIsMobile();
+  const { rx, ry } = getRadiiForPlayerCount(players.length, isMobile);
 
   const positions = useMemo(
     () => calculateSeatPositions(players.length, rx, ry),
@@ -51,7 +53,7 @@ export default function PokerTableView({ gameState }: PokerTableViewProps) {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className="relative mx-auto
-        w-[340px] h-[220px]
+        w-[220px] h-[340px]
         sm:w-[520px] sm:h-[320px]
         md:w-[700px] md:h-[420px]"
       style={{ overflow: 'visible' }}
