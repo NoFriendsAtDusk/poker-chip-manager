@@ -222,6 +222,19 @@ export default function SetupScreen() {
           </form>
         </div>
 
+        {/* View ongoing game */}
+        <div className="mt-6 text-center">
+          <Link
+            href="/view"
+            className="inline-block px-8 py-3 casino-card border-2 border-casino-gold-dark gold-text text-lg font-bold rounded-lg hover:border-casino-gold hover:bg-casino-card-light transition-all"
+          >
+            観戦する
+          </Link>
+          <p className="text-gray-400 text-sm mt-2">
+            ルームコードを入力して進行中のゲームを観戦できます
+          </p>
+        </div>
+
         {/* Disclaimer */}
         <div className="mt-8 text-center text-white text-sm felt-surface p-4 rounded-lg border border-casino-gold-dark">
           <p>
