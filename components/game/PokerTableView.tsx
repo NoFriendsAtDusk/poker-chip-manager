@@ -15,9 +15,10 @@ import ChipStack from './ChipStack';
 
 interface PokerTableViewProps {
   gameState: GameState;
+  onRenamePlayer?: (playerId: string, newName: string) => void;
 }
 
-export default function PokerTableView({ gameState }: PokerTableViewProps) {
+export default function PokerTableView({ gameState, onRenamePlayer }: PokerTableViewProps) {
   const {
     players,
     dealerButtonIndex,
@@ -187,6 +188,7 @@ export default function PokerTableView({ gameState }: PokerTableViewProps) {
             isBB={index === bigBlindIndex}
             isDealer={index === dealerButtonIndex}
             isCurrent={index === currentPlayerIndex}
+            onRename={onRenamePlayer}
           />
         </div>
       ))}

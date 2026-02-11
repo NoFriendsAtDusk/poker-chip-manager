@@ -14,7 +14,7 @@ import SharePanel from '@/components/game/SharePanel';
 
 export default function GameScreen() {
   const router = useRouter();
-  const { gameState, undoLastAction } = useGameStore();
+  const { gameState, undoLastAction, renamePlayer } = useGameStore();
   const undoHistory = useGameStore((s) => s.undoHistory);
   const canUndo = undoHistory.length > 0;
 
@@ -49,7 +49,7 @@ export default function GameScreen() {
 
       {/* Poker Table — centered in remaining space */}
       <div className="flex-1 flex items-center justify-center z-10" style={{ overflow: 'visible' }}>
-        <PokerTableView gameState={gameState} />
+        <PokerTableView gameState={gameState} onRenamePlayer={renamePlayer} />
       </div>
 
       {/* Bottom dock — undo + action/showdown/gameover panels */}

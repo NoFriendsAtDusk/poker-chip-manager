@@ -24,6 +24,7 @@ interface GameStore {
   selectWinners: (potWinners: PotWinner[]) => void;
   nextGame: () => void;
   resetGame: () => void;
+  renamePlayer: (playerId: string, newName: string) => void;
   createMultiplayerRoom: () => Promise<string>;
   leaveMultiplayer: () => void;
 }
@@ -95,6 +96,22 @@ export const useGameStore = create<GameStore>()(
 
         const newState = startNextGame(gameState);
         set({ gameState: newState, undoHistory: [] });
+        syncToSupabase(newState, multiplayerSession);
+      },
+
+      renamePlayer: (playerId, newName) => {
+        const { gameState, multiplayerSession } = get();
+        if (!gameState) return;
+        const trimmed = newName.trim();
+        if (!trimmed) return;
+
+        const newState: GameState = {
+          ...gameState,
+          players: gameState.players.map((p) =>
+            p.id === playerId ? { ...p, name: trimmed } : p
+          ),
+        };
+        set({ gameState: newState });
         syncToSupabase(newState, multiplayerSession);
       },
 

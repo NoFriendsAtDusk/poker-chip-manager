@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Player } from '@/types/game-types';
 import { formatChips } from '@/lib/utils';
@@ -10,6 +11,7 @@ interface SeatPanelProps {
   isBB: boolean;
   isDealer: boolean;
   isCurrent: boolean;
+  onRename?: (playerId: string, newName: string) => void;
 }
 
 export default function SeatPanel({
@@ -18,9 +20,37 @@ export default function SeatPanel({
   isBB,
   isDealer,
   isCurrent,
+  onRename,
 }: SeatPanelProps) {
   const isFolded = player.status === 'folded';
   const isOut = player.status === 'out';
+  const [isEditing, setIsEditing] = useState(false);
+  const [editValue, setEditValue] = useState(player.name);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select();
+    }
+  }, [isEditing]);
+
+  const handleSave = () => {
+    const trimmed = editValue.trim();
+    if (trimmed && trimmed !== player.name && onRename) {
+      onRename(player.id, trimmed);
+    }
+    setIsEditing(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSave();
+    } else if (e.key === 'Escape') {
+      setEditValue(player.name);
+      setIsEditing(false);
+    }
+  };
 
   return (
     <motion.div
@@ -53,10 +83,39 @@ export default function SeatPanel({
           {player.status === 'allIn' && <span className="text-[9px] px-1 py-0 bg-gradient-to-b from-red-600 to-red-800 text-white font-bold rounded animate-pulse">ALL-IN</span>}
         </div>
 
-        {/* Name */}
-        <div className="text-white text-[10px] sm:text-xs font-semibold truncate">
-          {player.name}
-        </div>
+        {/* Name — editable or static */}
+        {isEditing ? (
+          <input
+            ref={inputRef}
+            type="text"
+            value={editValue}
+            onChange={(e) => setEditValue(e.target.value)}
+            onBlur={handleSave}
+            onKeyDown={handleKeyDown}
+            maxLength={10}
+            className="w-full bg-casino-dark-bg border border-casino-gold text-white text-[10px] sm:text-xs text-center rounded px-0.5 py-0 outline-none"
+          />
+        ) : (
+          <div className="flex items-center justify-center gap-0.5">
+            <div className="text-white text-[10px] sm:text-xs font-semibold truncate">
+              {player.name}
+            </div>
+            {onRename && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setEditValue(player.name);
+                  setIsEditing(true);
+                }}
+                className="text-gray-500 hover:text-casino-gold text-[9px] sm:text-[10px] leading-none flex-shrink-0 transition-colors"
+                aria-label={`${player.name}の名前を変更`}
+                title="名前を変更"
+              >
+                ✎
+              </button>
+            )}
+          </div>
+        )}
 
         {/* Chips */}
         <div className="gold-text text-[10px] sm:text-xs font-bold">
