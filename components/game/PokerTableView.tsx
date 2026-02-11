@@ -53,17 +53,17 @@ export default function PokerTableView({ gameState }: PokerTableViewProps) {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className="relative mx-auto
-        w-[220px] h-[340px]
+        w-[300px] h-[460px]
         sm:w-[520px] sm:h-[320px]
         md:w-[700px] md:h-[420px]"
       style={{ overflow: 'visible' }}
     >
       {/* Felt surface — the oval table */}
       <div
-        className="absolute inset-[10px] sm:inset-[15px] md:inset-[20px]
+        className="absolute inset-[4px] sm:inset-[15px] md:inset-[20px]
           rounded-[50%]
           poker-felt-surface
-          border-[6px] sm:border-[8px] md:border-[10px]
+          border-[4px] sm:border-[8px] md:border-[10px]
           border-amber-900"
         style={{
           boxShadow:
@@ -72,7 +72,7 @@ export default function PokerTableView({ gameState }: PokerTableViewProps) {
       >
         {/* Inner decorative felt line */}
         <div
-          className="absolute inset-[6px] sm:inset-[10px] md:inset-[14px]
+          className="absolute inset-[3px] sm:inset-[10px] md:inset-[14px]
             rounded-[50%]
             border border-casino-felt-light/30"
         />
@@ -84,9 +84,10 @@ export default function PokerTableView({ gameState }: PokerTableViewProps) {
         const betDiscs = getBetChips(player.currentBet);
         if (betDiscs.length === 0) return null;
 
-        // Position 40% of the way from player toward center (50%, 50%)
-        const betX = positions[index].x + (50 - positions[index].x) * 0.4;
-        const betY = positions[index].y + (50 - positions[index].y) * 0.4;
+        // Position toward center — further on mobile so chips aren't hidden by seat panels
+        const betLerp = isMobile ? 0.55 : 0.4;
+        const betX = positions[index].x + (50 - positions[index].x) * betLerp;
+        const betY = positions[index].y + (50 - positions[index].y) * betLerp;
 
         return (
           <div

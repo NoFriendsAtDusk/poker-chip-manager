@@ -34,7 +34,7 @@ export default function SeatPanel({
       {/* Info panel */}
       <div
         className={`
-          w-[80px] sm:w-[100px] md:w-[120px]
+          w-[70px] sm:w-[100px] md:w-[120px]
           rounded-lg p-1.5 sm:p-2 text-center
           ${isCurrent
             ? 'bg-casino-felt-dark border-2 border-casino-gold current-player-glow'
