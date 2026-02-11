@@ -222,7 +222,6 @@ button:active {
 
   /* Counter-rotate all readable content so text stays upright */
   .table-rotate-wrapper .seat-content,
-  .table-rotate-wrapper .center-content,
   .table-rotate-wrapper .bet-content {
     transform: translate(-50%, -50%) rotate(-90deg);
   }

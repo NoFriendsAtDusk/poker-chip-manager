@@ -51,7 +51,7 @@ export default function PokerTableView({ gameState }: PokerTableViewProps) {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
-        className="table-rotated relative mx-auto
+        className="table-rotated relative mx-auto shrink-0
           w-[340px] h-[220px]
           sm:w-[520px] sm:h-[320px]
           md:w-[700px] md:h-[420px]"
