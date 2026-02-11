@@ -6,8 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useGameStore } from '@/store/game-store';
 import { panelVariants } from '@/lib/animation-variants';
 import GameHeader from '@/components/game/GameHeader';
-import CommunityCards from '@/components/game/CommunityCards';
-import PlayerTable from '@/components/game/PlayerTable';
+import PokerTableView from '@/components/game/PokerTableView';
 import ActionPanel from '@/components/game/ActionPanel';
 import ShowdownPanel from '@/components/game/ShowdownPanel';
 import GameOverPanel from '@/components/game/GameOverPanel';
@@ -19,7 +18,6 @@ export default function GameScreen() {
   const canUndo = undoHistory.length > 0;
 
   useEffect(() => {
-    // Redirect to setup if no game state
     if (!gameState) {
       router.push('/');
     }
@@ -36,51 +34,37 @@ export default function GameScreen() {
     );
   }
 
+  const isPlayPhase = gameState.stage !== 'showdown' && gameState.stage !== 'gameOver';
+
   return (
-    <div className="min-h-screen poker-table">
-      <div className="max-w-6xl mx-auto px-2 py-4 sm:px-4 sm:py-8">
-        {/* Game Header */}
+    <div className="h-screen poker-table flex flex-col overflow-hidden">
+      {/* Compact Header */}
+      <div className="flex-shrink-0 px-2 pt-2 sm:px-4 sm:pt-4 z-30">
         <GameHeader gameState={gameState} />
+      </div>
 
-        {/* Community Cards */}
+      {/* Poker Table — centered in remaining space */}
+      <div className="flex-1 flex items-center justify-center z-10" style={{ overflow: 'visible' }}>
+        <PokerTableView gameState={gameState} />
+      </div>
+
+      {/* Bottom dock — undo + action/showdown/gameover panels */}
+      <div className="flex-shrink-0 px-2 pb-2 sm:px-4 sm:pb-4 z-30">
+        {/* Undo button */}
         <AnimatePresence>
-          {gameState.communityCards > 0 && (
-            <motion.div
-              key="community-cards"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <CommunityCards count={gameState.communityCards} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Player Table */}
-        <PlayerTable
-          players={gameState.players}
-          dealerIndex={gameState.dealerButtonIndex}
-          sbIndex={gameState.smallBlindIndex}
-          bbIndex={gameState.bigBlindIndex}
-          currentPlayerIndex={gameState.currentPlayerIndex}
-        />
-
-        {/* Undo Button */}
-        <AnimatePresence>
-          {gameState.stage !== 'showdown' && (
+          {isPlayPhase && (
             <motion.div
               key="undo"
               variants={panelVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="mt-3 flex justify-end"
+              className="flex justify-end mb-1"
             >
               <button
                 onClick={undoLastAction}
                 disabled={!canUndo}
-                className="px-4 py-2 bg-casino-dark-bg border-2 border-casino-gold-dark text-casino-gold text-sm font-semibold rounded-lg hover:border-casino-gold hover:bg-casino-card-light transition-all disabled:bg-casino-dark-bg disabled:border-gray-700 disabled:text-gray-600 disabled:cursor-not-allowed"
+                className="px-3 py-1 bg-casino-dark-bg border border-casino-gold-dark text-casino-gold text-xs font-semibold rounded-lg hover:border-casino-gold transition-all disabled:border-gray-700 disabled:text-gray-600 disabled:cursor-not-allowed"
                 aria-label="元に戻す"
               >
                 ↩ 元に戻す
@@ -89,9 +73,9 @@ export default function GameScreen() {
           )}
         </AnimatePresence>
 
-        {/* Panels — animated transitions between Action / Showdown / GameOver */}
+        {/* Panels */}
         <AnimatePresence mode="wait">
-          {gameState.stage !== 'showdown' && gameState.stage !== 'gameOver' && (
+          {isPlayPhase && (
             <ActionPanel key="action" gameState={gameState} />
           )}
           {gameState.stage === 'showdown' && (
@@ -101,13 +85,6 @@ export default function GameScreen() {
             <GameOverPanel key="gameOver" gameState={gameState} />
           )}
         </AnimatePresence>
-
-        {/* Contact Link */}
-        <div className="mt-6 sm:mt-8 text-center">
-          <a href="/" className="text-white hover:text-casino-gold-light hover:underline transition-colors">
-            お問い合わせ
-          </a>
-        </div>
       </div>
     </div>
   );

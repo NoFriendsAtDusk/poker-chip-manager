@@ -98,7 +98,7 @@ export default function ShowdownPanel({ gameState }: ShowdownPanelProps) {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="felt-surface rounded-lg shadow-2xl p-4 sm:p-6 mb-4 sm:mb-6 border-2 border-casino-gold"
+      className="felt-surface rounded-lg shadow-2xl p-3 sm:p-4 border-2 border-casino-gold"
     >
       <h3 className="gold-text text-xl sm:text-2xl font-bold mb-4">
         勝者を選択してください
@@ -123,7 +123,7 @@ export default function ShowdownPanel({ gameState }: ShowdownPanelProps) {
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
-        className="space-y-2 sm:space-y-3 mb-4 sm:mb-6"
+        className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 max-h-[30vh] overflow-y-auto"
       >
         {currentEligiblePlayers.map(player => (
           <motion.button

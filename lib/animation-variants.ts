@@ -72,6 +72,16 @@ export const errorShake: Variants = {
   },
 };
 
+// Table surface appear
+export const tableAppear: Variants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: 'easeOut' as const },
+  },
+};
+
 // Stage text swap (GameHeader stage indicator)
 export const stageSwap = {
   initial: { opacity: 0, y: -10 },

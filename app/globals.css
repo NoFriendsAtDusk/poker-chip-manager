@@ -212,6 +212,16 @@ button:active {
   transform: scale(0.98);
 }
 
+/* ── Poker Table Ellipse ── */
+
+.poker-felt-surface {
+  background: radial-gradient(
+    ellipse at center,
+    var(--casino-felt-light) 0%,
+    var(--casino-felt-dark) 100%
+  );
+}
+
 /* ── Accessibility ── */
 
 @media (prefers-reduced-motion: reduce) {
