@@ -79,3 +79,11 @@ export interface ActionHistory {
   amount?: number;
   timestamp: number;
 }
+
+// Multiplayer types
+export type MultiplayerRole = 'host' | 'viewer';
+
+export interface MultiplayerSession {
+  roomCode: string;
+  role: MultiplayerRole;
+}

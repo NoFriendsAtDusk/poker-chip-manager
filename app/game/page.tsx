@@ -10,6 +10,7 @@ import PokerTableView from '@/components/game/PokerTableView';
 import ActionPanel from '@/components/game/ActionPanel';
 import ShowdownPanel from '@/components/game/ShowdownPanel';
 import GameOverPanel from '@/components/game/GameOverPanel';
+import SharePanel from '@/components/game/SharePanel';
 
 export default function GameScreen() {
   const router = useRouter();
@@ -38,9 +39,12 @@ export default function GameScreen() {
 
   return (
     <div className="h-screen poker-table flex flex-col overflow-hidden">
-      {/* Compact Header */}
+      {/* Compact Header + Share */}
       <div className="flex-shrink-0 px-2 pt-2 sm:px-4 sm:pt-4 z-30">
         <GameHeader gameState={gameState} />
+        <div className="flex justify-end mt-1">
+          <SharePanel />
+        </div>
       </div>
 
       {/* Poker Table — centered in remaining space */}
