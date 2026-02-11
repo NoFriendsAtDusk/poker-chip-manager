@@ -203,35 +203,6 @@ button:active {
   );
 }
 
-/* ── Mobile table rotation ── */
-
-/* On mobile, rotate the table 90° so the ellipse is portrait-oriented */
-@media (max-width: 639px) {
-  .table-rotate-wrapper {
-    width: 240px;
-    height: 360px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
-  }
-
-  .table-rotate-wrapper > .table-rotated {
-    transform: rotate(90deg);
-  }
-
-  /* Counter-rotate all readable content so text stays upright */
-  .table-rotate-wrapper .seat-content,
-  .table-rotate-wrapper .center-content,
-  .table-rotate-wrapper .bet-content {
-    transform: translate(-50%, -50%) rotate(-90deg);
-  }
-
-  .table-rotate-wrapper .center-content {
-    transform: rotate(-90deg);
-  }
-}
-
 /* ── Accessibility ── */
 
 @media (prefers-reduced-motion: reduce) {
