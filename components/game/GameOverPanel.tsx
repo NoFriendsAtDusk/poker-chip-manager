@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { GameState } from '@/types/game-types';
@@ -13,7 +14,21 @@ interface GameOverPanelProps {
 
 export default function GameOverPanel({ gameState }: GameOverPanelProps) {
   const router = useRouter();
-  const { nextGame } = useGameStore();
+  const { nextGame, buyIn } = useGameStore();
+  const [buyInAmounts, setBuyInAmounts] = useState<Record<string, number>>({});
+
+  const betUnit = gameState.settings.betUnit;
+
+  const handleBuyIn = (playerId: string) => {
+    const amount = buyInAmounts[playerId];
+    if (!amount || amount <= 0) return;
+    buyIn(playerId, amount);
+    setBuyInAmounts((prev) => {
+      const next = { ...prev };
+      delete next[playerId];
+      return next;
+    });
+  };
 
   const handleNextGame = () => {
     nextGame();
@@ -45,7 +60,7 @@ export default function GameOverPanel({ gameState }: GameOverPanelProps) {
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="bg-casino-dark-bg/80 border border-casino-gold-dark rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 max-h-[30vh] overflow-y-auto"
+          className="bg-casino-dark-bg/80 border border-casino-gold-dark rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 max-h-[40vh] overflow-y-auto"
         >
           {gameState.players
             .slice()
@@ -54,10 +69,39 @@ export default function GameOverPanel({ gameState }: GameOverPanelProps) {
               <motion.div
                 key={player.id}
                 variants={staggerItem}
-                className="flex justify-between py-2"
+                className="py-2"
               >
-                <span className="casino-text-white font-semibold">{player.name}</span>
-                <span className="gold-text font-bold">{formatChips(player.chips)}</span>
+                <div className="flex justify-between items-center">
+                  <span className="casino-text-white font-semibold">{player.name}</span>
+                  <span className="gold-text font-bold">{formatChips(player.chips)}</span>
+                </div>
+
+                {/* Buy-in option for eliminated players */}
+                {player.chips === 0 && (
+                  <div className="flex items-center gap-2 mt-1.5">
+                    <input
+                      type="number"
+                      min={betUnit}
+                      step={betUnit}
+                      value={buyInAmounts[player.id] ?? ''}
+                      onChange={(e) =>
+                        setBuyInAmounts((prev) => ({
+                          ...prev,
+                          [player.id]: Number(e.target.value),
+                        }))
+                      }
+                      placeholder={`${betUnit}単位`}
+                      className="flex-1 min-w-0 px-2 py-1 bg-casino-dark-bg border border-casino-gold-dark text-white text-sm rounded focus:border-casino-gold focus:outline-none"
+                    />
+                    <button
+                      onClick={() => handleBuyIn(player.id)}
+                      disabled={!buyInAmounts[player.id] || buyInAmounts[player.id] <= 0}
+                      className="px-3 py-1 bg-gradient-to-b from-casino-gold to-casino-gold-dark text-casino-dark-bg text-sm font-bold rounded hover:from-casino-gold-light hover:to-casino-gold transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                    >
+                      バイイン
+                    </button>
+                  </div>
+                )}
               </motion.div>
             ))}
         </motion.div>
