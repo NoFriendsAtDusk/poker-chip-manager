@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
@@ -28,6 +29,11 @@ export default function RootLayout({
     <html lang="ja">
       <body className="antialiased">
         <main>{children}</main>
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2027941585770580"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
         <Analytics />
       </body>
     </html>
