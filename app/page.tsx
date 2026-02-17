@@ -42,57 +42,68 @@ export default function SetupScreen() {
   };
 
   return (
-    <div className="min-h-screen poker-table">
+    <div className="min-h-screen hero-bg">
       <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex justify-center gap-3 mb-4">
-            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-red-500 border-4 border-white"></div>
-            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-green-500 border-4 border-white"></div>
-            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-blue-500 border-4 border-white"></div>
+
+        {/* Hero Section */}
+        <div className="text-center pt-4 pb-10">
+          {/* Suit icons row */}
+          <div className="flex justify-center items-center gap-4 mb-6">
+            <span className="text-3xl sm:text-4xl opacity-60">♠</span>
+            <span className="text-3xl sm:text-4xl text-red-500 opacity-60">♥</span>
+            <span className="text-3xl sm:text-4xl text-red-500 opacity-60">♦</span>
+            <span className="text-3xl sm:text-4xl opacity-60">♣</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold casino-text-white mb-2">
-            トランプだけで遊べる！
+
+          {/* Main title */}
+          <h1 className="text-3xl sm:text-5xl font-bold casino-text-white mb-3 tracking-wide">
+            チップ不要・トランプだけで遊べる！
           </h1>
-          <h2 className="text-xl sm:text-2xl gold-text">
-            ポーカーチップアプリ
+          <h2 className="text-2xl sm:text-3xl font-bold gold-text tracking-wider">
+            プレイ状況をカンタン管理
           </h2>
-          <div className="flex justify-center gap-2 mt-4 text-2xl">
-            <span>♠️</span>
-            <span>♥️</span>
-            <span>♦️</span>
-            <span>♣️</span>
+
+          {/* Decorative divider */}
+          <div className="flex items-center justify-center gap-3 mt-6">
+            <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-casino-gold opacity-60"></div>
+            <span className="text-casino-gold text-sm">POKER CHIP MANAGEMENT APP</span>
+            <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-casino-gold opacity-60"></div>
           </div>
+
+          {/* Subtitle */}
+          <p className="text-gray-400 text-sm sm:text-base mt-4">
+            カードは本物、チップはアプリで。本格テキサスホールデムを手軽に楽しもう。
+          </p>
         </div>
 
         {/* Navigation Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-8">
           <Link
             href="/how-to-play"
-            className="px-6 py-2 casino-card gold-text font-semibold rounded-lg hover:bg-casino-card-light transition-all text-center"
+            className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
           >
-            遊び方ガイド
+            使い方
           </Link>
           <Link
             href="/rules"
-            className="px-6 py-2 casino-card gold-text font-semibold rounded-lg hover:bg-casino-card-light transition-all text-center"
+            className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
           >
-            ルール解説
+            ポーカーのルール
           </Link>
           <Link
             href="/faq"
-            className="px-6 py-2 casino-card gold-text font-semibold rounded-lg hover:bg-casino-card-light transition-all text-center"
+            className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
           >
-            このアプリについて
+            よくある質問
           </Link>
         </div>
 
         {/* Game Settings Form */}
-        <div className="casino-card rounded-lg shadow-2xl p-4 sm:p-8">
+        <div className="glass-card rounded-xl p-4 sm:p-8">
           <h2 className="text-2xl font-bold gold-text mb-6 flex items-center gap-2">
-            <span>♦️</span>
+            <span className="text-casino-gold">♦</span>
             ゲーム設定
-            <span>♠️</span>
+            <span className="text-casino-gold">♠</span>
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -107,25 +118,27 @@ export default function SetupScreen() {
                 max="10"
                 value={formData.playerCount}
                 onChange={(e) => handlePlayerCountChange(Number(e.target.value))}
-                className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
+                className="w-full px-4 py-3 bg-black/40 border border-casino-gold-dark/50 text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all placeholder-gray-500"
               />
             </div>
 
-            {/* Player Names */}
-            {formData.playerNames.map((name, index) => (
-              <div key={index}>
-                <label className="block text-white font-semibold mb-2">
-                  プレイヤー {index + 1} の名前
-                </label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => handlePlayerNameChange(index, e.target.value)}
-                  placeholder={`Player ${index + 1}`}
-                  className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
-                />
-              </div>
-            ))}
+            {/* Player Names — 2-column grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              {formData.playerNames.map((name, index) => (
+                <div key={index}>
+                  <label className="block text-white font-semibold mb-2 text-sm">
+                    プレイヤー {index + 1}
+                  </label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => handlePlayerNameChange(index, e.target.value)}
+                    placeholder={`Player ${index + 1}`}
+                    className="w-full px-4 py-3 bg-black/40 border border-casino-gold-dark/50 text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all placeholder-gray-500"
+                  />
+                </div>
+              ))}
+            </div>
 
             {/* Bet Unit */}
             <div>
@@ -133,11 +146,20 @@ export default function SetupScreen() {
                 ベット単位
               </label>
               <input
+                type="range"
+                min="10"
+                max="1000"
+                step="10"
+                value={formData.betUnit}
+                onChange={(e) => setFormData({ ...formData, betUnit: Number(e.target.value) })}
+                className="gold-slider mb-2"
+              />
+              <input
                 type="number"
                 min="1"
                 value={formData.betUnit}
                 onChange={(e) => setFormData({ ...formData, betUnit: Number(e.target.value) })}
-                className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
+                className="w-full px-4 py-3 bg-black/40 border border-casino-gold-dark/50 text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all placeholder-gray-500"
               />
             </div>
 
@@ -147,12 +169,21 @@ export default function SetupScreen() {
                 初期チップ
               </label>
               <input
+                type="range"
+                min="1000"
+                max="100000"
+                step="1000"
+                value={formData.startingChips}
+                onChange={(e) => setFormData({ ...formData, startingChips: Number(e.target.value) })}
+                className="gold-slider mb-2"
+              />
+              <input
                 type="number"
                 min="100"
                 step="100"
                 value={formData.startingChips}
                 onChange={(e) => setFormData({ ...formData, startingChips: Number(e.target.value) })}
-                className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
+                className="w-full px-4 py-3 bg-black/40 border border-casino-gold-dark/50 text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all placeholder-gray-500"
               />
             </div>
 
@@ -177,11 +208,20 @@ export default function SetupScreen() {
                     Small Blind
                   </label>
                   <input
+                    type="range"
+                    min="10"
+                    max="5000"
+                    step="10"
+                    value={formData.smallBlind}
+                    onChange={(e) => setFormData({ ...formData, smallBlind: Number(e.target.value) })}
+                    className="gold-slider mb-2"
+                  />
+                  <input
                     type="number"
                     min="1"
                     value={formData.smallBlind}
                     onChange={(e) => setFormData({ ...formData, smallBlind: Number(e.target.value) })}
-                    className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
+                    className="w-full px-4 py-3 bg-black/40 border border-casino-gold-dark/50 text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all placeholder-gray-500"
                   />
                 </div>
 
@@ -190,11 +230,20 @@ export default function SetupScreen() {
                     Big Blind
                   </label>
                   <input
+                    type="range"
+                    min="10"
+                    max="10000"
+                    step="10"
+                    value={formData.bigBlind}
+                    onChange={(e) => setFormData({ ...formData, bigBlind: Number(e.target.value) })}
+                    className="gold-slider mb-2"
+                  />
+                  <input
                     type="number"
                     min="1"
                     value={formData.bigBlind}
                     onChange={(e) => setFormData({ ...formData, bigBlind: Number(e.target.value) })}
-                    className="w-full px-4 py-3 bg-casino-dark-bg-light border-2 border-casino-gold-dark text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all"
+                    className="w-full px-4 py-3 bg-black/40 border border-casino-gold-dark/50 text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all placeholder-gray-500"
                   />
                 </div>
 
@@ -226,7 +275,7 @@ export default function SetupScreen() {
         <div className="mt-6 text-center">
           <Link
             href="/view"
-            className="inline-block px-8 py-3 casino-card border-2 border-casino-gold-dark gold-text text-lg font-bold rounded-lg hover:border-casino-gold hover:bg-casino-card-light transition-all"
+            className="inline-block px-8 py-3 glass-card gold-text text-lg font-bold rounded-lg hover:bg-white/10 transition-all"
           >
             観戦する
           </Link>
@@ -236,10 +285,10 @@ export default function SetupScreen() {
         </div>
 
         {/* Disclaimer */}
-        <div className="mt-8 text-center text-white text-sm felt-surface p-4 rounded-lg border border-casino-gold-dark">
+        <div className="mt-8 text-center text-white text-sm glass-card p-4 rounded-lg">
           <p>
-            本アプリは、ポーカーのゲーム進行を補助する目的でチップ計算を管理するツールです。
-            金銭や換金可能な物品を賭ける行為は法律で禁止されており、本アプリはこれを一切認めません。
+            本アプリケーションは、ポーカーにおけるチップ計算およびゲーム進行の管理を目的とした補助ツールです。
+当アプリ内での金銭や換金可能な物品を賭ける行為（賭博）は法律で固く禁じられており、本サービスはこれらを一切推奨・容認するものではありません。
           </p>
         </div>
 
@@ -258,8 +307,8 @@ export default function SetupScreen() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-6 text-center text-white text-sm">
-          © 2025 Poker Chips Manager. All Rights Reserved.
+        <div className="mt-6 pb-4 text-center text-gray-500 text-sm">
+          © 2026 Poker Chips.  All Rights Reserved.
         </div>
       </div>
     </div>
