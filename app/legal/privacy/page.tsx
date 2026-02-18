@@ -8,7 +8,7 @@ export default function PrivacyPolicyPage() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="bg-white rounded-lg shadow-lg p-4 sm:p-8">
           <h1 className="text-3xl font-bold text-green-800 mb-2">プライバシーポリシー</h1>
-          <p className="text-sm text-gray-500 mb-6">最終更新日：2025年6月</p>
+          <p className="text-sm text-gray-500 mb-6">最終更新日：2026年2月</p>
 
           <div className="space-y-4 text-gray-700">
 

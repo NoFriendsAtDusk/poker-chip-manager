@@ -112,14 +112,50 @@ export default function SetupScreen() {
               <label className="block text-white font-semibold mb-2">
                 プレイ人数
               </label>
-              <input
-                type="number"
-                min="2"
-                max="10"
-                value={formData.playerCount}
-                onChange={(e) => handlePlayerCountChange(Number(e.target.value))}
-                className="w-full px-4 py-3 bg-black/40 border border-casino-gold-dark/50 text-white rounded-lg focus:ring-2 focus:ring-casino-gold focus:border-casino-gold transition-all placeholder-gray-500"
-              />
+              {/* Silhouette icons */}
+              <div className="flex items-center gap-1.5 flex-wrap mb-3">
+                {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => { if (n >= 2) handlePlayerCountChange(n); }}
+                    className={`flex flex-col items-center justify-center w-8 h-10 rounded transition-all ${
+                      n <= formData.playerCount
+                        ? 'text-casino-gold'
+                        : n >= 2
+                          ? 'text-gray-600 hover:text-gray-400'
+                          : 'text-gray-700 cursor-not-allowed'
+                    }`}
+                    disabled={n < 2}
+                    aria-label={`${n}人`}
+                  >
+                    <svg viewBox="0 0 24 32" fill="currentColor" className="w-5 h-6">
+                      <circle cx="12" cy="8" r="6" />
+                      <path d="M12 16c-7 0-11 4-11 8v2c0 1 0.5 2 2 2h18c1.5 0 2-1 2-2v-2c0-4-4-8-11-8z" />
+                    </svg>
+                  </button>
+                ))}
+              </div>
+              {/* +/- controls with count */}
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => { if (formData.playerCount > 2) handlePlayerCountChange(formData.playerCount - 1); }}
+                  disabled={formData.playerCount <= 2}
+                  className="w-10 h-10 rounded-lg bg-black/40 border border-casino-gold-dark/50 text-casino-gold text-xl font-bold hover:border-casino-gold transition-all disabled:text-gray-600 disabled:border-gray-700 disabled:cursor-not-allowed"
+                >
+                  -
+                </button>
+                <span className="gold-text text-2xl font-bold min-w-[2ch] text-center">{formData.playerCount}</span>
+                <button
+                  type="button"
+                  onClick={() => { if (formData.playerCount < 10) handlePlayerCountChange(formData.playerCount + 1); }}
+                  disabled={formData.playerCount >= 10}
+                  className="w-10 h-10 rounded-lg bg-black/40 border border-casino-gold-dark/50 text-casino-gold text-xl font-bold hover:border-casino-gold transition-all disabled:text-gray-600 disabled:border-gray-700 disabled:cursor-not-allowed"
+                >
+                  +
+                </button>
+              </div>
             </div>
 
             {/* Player Names — 2-column grid */}
@@ -296,9 +332,6 @@ export default function SetupScreen() {
         <div className="mt-6 flex flex-wrap justify-center gap-4 text-white text-sm">
           <Link href="/legal/privacy" className="hover:text-casino-gold-light hover:underline transition-colors">プライバシーポリシー</Link>
           <Link href="/legal/terms" className="hover:text-casino-gold-light hover:underline transition-colors">利用規約</Link>
-          <Link href="/legal/specified-commercial-transactions" className="hover:text-casino-gold-light hover:underline transition-colors">
-            特定商取引法に関する表示
-          </Link>
         </div>
 
         {/* Contact */}

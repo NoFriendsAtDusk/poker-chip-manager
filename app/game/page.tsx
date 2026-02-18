@@ -42,7 +42,18 @@ export default function GameScreen() {
       {/* Compact Header + Share */}
       <div className="flex-shrink-0 px-2 pt-2 sm:px-4 sm:pt-4 z-30">
         <GameHeader gameState={gameState} />
-        <div className="flex justify-end mt-1">
+        <div className="flex items-center justify-between mt-1">
+          {/* Current turn indicator */}
+          {isPlayPhase ? (
+            <div className="flex items-center gap-2 bg-casino-dark-bg/80 backdrop-blur-sm rounded-lg px-3 py-1.5 border border-casino-gold/40">
+              <span className="text-gray-400 text-xs">ターン：</span>
+              <span className="gold-text font-bold text-sm">
+                {gameState.players[gameState.currentPlayerIndex]?.name}
+              </span>
+            </div>
+          ) : (
+            <div />
+          )}
           <SharePanel />
         </div>
       </div>

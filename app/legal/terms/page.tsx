@@ -6,10 +6,10 @@ export default function TermsPage() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="bg-white rounded-lg shadow-lg p-4 sm:p-8">
           <h1 className="text-3xl font-bold text-green-800 mb-2">利用規約</h1>
-          <p className="text-sm text-gray-500 mb-6">最終更新日：2025年6月</p>
+          <p className="text-sm text-gray-500 mb-6">最終更新日：2026年2月</p>
 
           <div className="space-y-4 text-gray-700">
-            <p>この利用規約（以下「本規約」といいます）は、ポーカーチップマネージャー（以下「本サービス」といいます）の利用条件を定めるものです。本サービスをご利用いただくことで、本規約に同意したものとみなします。</p>
+            <p>この利用規約（以下「本規約」といいます）は、Pokerchip.jp（以下「本サービス」といいます）の利用条件を定めるものです。本サービスをご利用いただくことで、本規約に同意したものとみなします。</p>
 
             <h2 className="text-xl font-bold text-green-800 mt-6">第1条（適用）</h2>
             <p>本規約は、ユーザーと本サービス運営者との間における本サービスの利用に関わる一切の関係に適用されます。</p>

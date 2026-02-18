@@ -16,22 +16,22 @@ export default function FAQPage() {
               <div className="space-y-5">
                 <section>
                   <h3 className="font-bold text-green-800 mb-1">Q. このアプリは何ですか？</h3>
-                  <p className="text-sm">ポーカーチップマネージャーは、実物のトランプカードを使ってテキサスホールデム・ポーカーを遊ぶ際に、チップの計算とゲーム進行を管理する無料の補助ツールです。カードの配布や役の判定はアプリでは行わず、ベット・コール・レイズ・フォールドなどのアクション管理、ポット計算、サイドポットの自動分配を行います。</p>
+                  <p className="text-sm">実物のトランプカードを使ってテキサスホールデム・ポーカーを遊ぶ際に、チップの計算とゲーム進行を管理する無料の補助ツールです。カードの配布や役の判定はアプリでは行わず、ベット・コール・レイズ・フォールドなどのアクション管理、ポット計算、サイドポットの自動分配を行います。</p>
                 </section>
 
                 <section>
                   <h3 className="font-bold text-green-800 mb-1">Q. 料金はかかりますか？</h3>
-                  <p className="text-sm">完全無料でご利用いただけます。課金要素や有料プランは一切ありません。アプリの運営費はGoogle AdSenseによる広告表示で賄っています。</p>
+                  <p className="text-sm">完全無料でご利用いただけます。課金要素や有料プランは一切ありません。</p>
                 </section>
 
                 <section>
                   <h3 className="font-bold text-green-800 mb-1">Q. アカウント登録は必要ですか？</h3>
-                  <p className="text-sm">不要です。サイトにアクセスするだけですぐにご利用いただけます。メールアドレスやパスワードの入力も必要ありません。</p>
+                  <p className="text-sm">不要です。サイトにアクセスするだけですぐにご利用いただけます。</p>
                 </section>
 
                 <section>
                   <h3 className="font-bold text-green-800 mb-1">Q. スマートフォンでも使えますか？</h3>
-                  <p className="text-sm">はい。スマートフォン、タブレット、PCのいずれのブラウザにも対応しています。画面サイズに応じてレイアウトが自動調整されます。推奨ブラウザはChrome、Safari、Edgeの最新バージョンです。</p>
+                  <p className="text-sm">スマートフォン、タブレット、PCのいずれのブラウザにも対応しています。画面サイズに応じてレイアウトが自動調整されます。推奨ブラウザはChrome、Safari、Edgeの最新バージョンです。</p>
                 </section>
 
                 <section>
@@ -52,17 +52,17 @@ export default function FAQPage() {
 
                 <section>
                   <h3 className="font-bold text-green-800 mb-1">Q. トランプカードは必要ですか？</h3>
-                  <p className="text-sm">はい、実物のトランプカード（ジョーカーを除く52枚）が必要です。このアプリはチップの管理とゲーム進行のみを行い、カードの配布や役の判定は行いません。手札の配布やコミュニティカードの公開は、プレイヤー自身が手動で行ってください。</p>
+                  <p className="text-sm">実物のトランプカード（ジョーカーを除く52枚）が必要です。このアプリはチップの管理とゲーム進行のみを行い、カードの配布や役の判定は行いません。手札の配布やコミュニティカードの公開は、プレイヤー自身が手動で行ってください。</p>
                 </section>
 
                 <section>
                   <h3 className="font-bold text-green-800 mb-1">Q. ゲーム中にプレイヤー名を変更できますか？</h3>
-                  <p className="text-sm">はい。ゲーム画面でプレイヤー名の横にある編集アイコンをタップすると、その場で名前を変更できます。変更は即座に反映され、観戦モードを使用中の場合は観戦者の画面にもリアルタイムで反映されます。</p>
+                  <p className="text-sm">ゲーム画面でプレイヤー名の横にある編集アイコンをタップすると、その場で名前を変更できます。変更は即座に反映され、観戦モードを使用中の場合は観戦者の画面にもリアルタイムで反映されます。</p>
                 </section>
 
                 <section>
                   <h3 className="font-bold text-green-800 mb-1">Q. 操作を間違えた場合はどうすればいいですか？</h3>
-                  <p className="text-sm">「元に戻す（Undo）」ボタンで直前の状態に戻すことができます。最大20手前まで遡ることが可能です。誤ってフォールドやレイズをしてしまった場合でも安心です。</p>
+                  <p className="text-sm">「元に戻す（Undo）」ボタンで直前の状態に戻すことができます。最大20手前まで遡ることが可能です。</p>
                 </section>
 
                 <section>
@@ -98,7 +98,7 @@ export default function FAQPage() {
 
                 <section>
                   <h3 className="font-bold text-green-800 mb-1">Q. 観戦者もアクション操作できますか？</h3>
-                  <p className="text-sm">いいえ。観戦モードは閲覧専用です。ベットやフォールドなどの操作はホストのデバイスからのみ行えます。観戦者の画面にはアクションボタンが表示されません。</p>
+                  <p className="text-sm">観戦モードは閲覧専用です。ベットやフォールドなどの操作はホストのデバイスからのみ行えます。観戦者の画面にはアクションボタンが表示されません。</p>
                 </section>
 
                 <section>
@@ -119,12 +119,12 @@ export default function FAQPage() {
               <div className="space-y-5">
                 <section>
                   <h3 className="font-bold text-green-800 mb-1">Q. データはどこに保存されますか？</h3>
-                  <p className="text-sm">ゲームデータ（プレイヤー名、チップ数、ゲーム状態など）は、お使いのブラウザのローカルストレージに保存されます。観戦モードを有効にしない限り、データがサーバーに送信されることはありません。観戦モード使用時のみ、ゲーム状態がSupabase（クラウドデータベース）に一時的に保存されます。</p>
+                  <p className="text-sm">ゲームデータ（プレイヤー名、チップ数、ゲーム状態など）は、お使いのブラウザのローカルストレージに保存されます。観戦モード使用時のみ、ゲーム状態がクラウドデータベースに一時的に保存されます。</p>
                 </section>
 
                 <section>
                   <h3 className="font-bold text-green-800 mb-1">Q. ゲームを中断・再開できますか？</h3>
-                  <p className="text-sm">はい。ゲームの状態はブラウザのローカルストレージに自動保存されるため、ページを閉じたりブラウザを終了しても、同じブラウザで再度アクセスすれば続きから再開できます。ただし、ブラウザのデータを消去すると保存データも削除されます。</p>
+                  <p className="text-sm">ゲームの状態はブラウザのローカルストレージに自動保存されるため、ページを閉じたりブラウザを終了しても、同じブラウザで再度アクセスすれば続きから再開できます。ただし、ブラウザのデータを消去すると保存データも削除されます。</p>
                 </section>
 
                 <section>
@@ -134,7 +134,7 @@ export default function FAQPage() {
 
                 <section>
                   <h3 className="font-bold text-green-800 mb-1">Q. 個人情報は収集されますか？</h3>
-                  <p className="text-sm">氏名、メールアドレス、アカウント情報などの個人情報は一切収集しません。サービス改善のためVercel Analyticsによるアクセス解析（Cookie不使用）、およびGoogle AdSenseによる広告配信を行っています。詳細は<Link href="/legal/privacy" className="text-green-700 underline">プライバシーポリシー</Link>をご覧ください。</p>
+                  <p className="text-sm">氏名、メールアドレス、アカウント情報などの個人情報は一切収集しません。詳細は<Link href="/legal/privacy" className="text-green-700 underline">プライバシーポリシー</Link>をご覧ください。</p>
                 </section>
               </div>
             </div>
