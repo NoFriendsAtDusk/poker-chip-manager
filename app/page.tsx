@@ -120,25 +120,43 @@ export default function SetupScreen() {
           </div>
         </div>
 
-        {/* Characters + Navigation Buttons */}
-        <div className="relative mb-8">
-          {/* Left character (red chip mascot) */}
+        {/* Characters — mobile: centered row, desktop: flanking buttons */}
+        <div className="flex justify-center items-end gap-6 mt-2 mb-2 sm:hidden">
           <Image
             src="/character.png"
             alt="ポーカーチップマスコット"
             width={240}
             height={240}
             priority
-            className="absolute pointer-events-none select-none w-20 sm:w-32 md:w-44 lg:w-52 -left-2 sm:-left-4 md:-left-8 bottom-0 sm:bottom-[-1rem]"
+            className="w-24 h-auto object-contain"
           />
-          {/* Right character (blue chip mascot) */}
           <Image
             src="/character2.png"
             alt="ポーカーチップマスコット"
             width={240}
             height={240}
             priority
-            className="absolute pointer-events-none select-none w-20 sm:w-32 md:w-44 lg:w-52 -right-2 sm:-right-4 md:-right-8 bottom-0 sm:bottom-[-1rem]"
+            className="w-24 h-auto object-contain"
+          />
+        </div>
+
+        {/* Navigation Buttons (with flanking characters on sm+) */}
+        <div className="relative mb-8">
+          {/* Left character — desktop only */}
+          <Image
+            src="/character.png"
+            alt="ポーカーチップマスコット"
+            width={240}
+            height={240}
+            className="hidden sm:block absolute pointer-events-none select-none sm:w-32 md:w-44 lg:w-52 -left-4 md:-left-8 bottom-0 sm:bottom-[-1rem]"
+          />
+          {/* Right character — desktop only */}
+          <Image
+            src="/character2.png"
+            alt="ポーカーチップマスコット"
+            width={240}
+            height={240}
+            className="hidden sm:block absolute pointer-events-none select-none sm:w-32 md:w-44 lg:w-52 -right-4 md:-right-8 bottom-0 sm:bottom-[-1rem]"
           />
 
           <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 relative z-10 py-2">
