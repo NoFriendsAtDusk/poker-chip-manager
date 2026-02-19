@@ -10,13 +10,39 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "ポーカーチップマネージャー",
-  description: "トランプだけで遊べるポーカーチップ管理アプリ",
+  title: "ポーカーチップ管理 | チップなし・トランプだけで遊べる無料アプリ",
+  description:
+    "チップがなくてもポーカーができる！トランプだけでテキサスホールデムを楽しむ無料チップ管理Webアプリ。登録不要・インストール不要ですぐ使えます。ブラインド管理・サイドポット計算・観戦機能付き。",
+  keywords: [
+    "ポーカー チップ管理",
+    "チップ管理",
+    "ポーカー チップなし",
+    "トランプだけ ポーカー",
+    "テキサスホールデム 無料",
+    "チップ計算",
+    "ポーカー 無料アプリ",
+    "チップなし ポーカー やり方",
+  ],
+  alternates: {
+    canonical: "https://pokerchip.jp",
+  },
   openGraph: {
-    title: "ポーカーチップマネージャー",
-    description: "トランプだけで遊べるポーカーチップ管理アプリ",
-    type: "website",
+    title: "ポーカーチップ管理 | チップなし・トランプだけで遊べる無料アプリ",
+    description:
+      "チップがなくてもポーカーができる！トランプだけでテキサスホールデムを楽しむ無料チップ管理Webアプリ。",
+    url: "https://pokerchip.jp",
+    siteName: "ポーカーチップマネージャー",
     locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "ポーカーチップ管理 | チップなし・トランプだけ",
+    description: "チップなしでポーカーができる無料Webアプリ。登録不要。",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

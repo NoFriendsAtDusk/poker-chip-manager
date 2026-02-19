@@ -41,8 +41,44 @@ export default function SetupScreen() {
     router.push('/game');
   };
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'ポーカーチップマネージャー',
+    alternateName: ['ポーカーチップ管理アプリ', 'pokerchip.jp'],
+    url: 'https://pokerchip.jp',
+    description:
+      'チップなし・トランプだけでテキサスホールデムを楽しむ無料チップ管理Webアプリ。プレイヤー名・チップ枚数・ブラインド・ポットをリアルタイムで管理。',
+    applicationCategory: 'GameApplication',
+    operatingSystem: 'Any',
+    browserRequirements: 'Requires JavaScript',
+    inLanguage: 'ja',
+    isAccessibleForFree: true,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'JPY',
+    },
+    featureList: [
+      'チップ枚数管理',
+      'ベット・レイズ管理',
+      'サイドポット自動計算',
+      'ブラインド管理',
+      'リアルタイム観戦機能（共有コード）',
+      'プレイヤー2〜10人対応',
+    ],
+    author: {
+      '@type': 'Organization',
+      name: 'Pokerchip.jp',
+    },
+  };
+
   return (
     <div className="min-h-screen hero-bg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-4xl mx-auto px-4 py-8">
 
         {/* Hero Section */}
@@ -327,6 +363,58 @@ export default function SetupScreen() {
 当アプリ内での金銭や換金可能な物品を賭ける行為（賭博）は法律で固く禁じられており、本サービスはこれらを一切推奨・容認するものではありません。
           </p>
         </div>
+
+        {/* SEO Content Section */}
+        <section className="mt-10 glass-card rounded-xl p-4 sm:p-8 text-gray-300">
+          <h2 className="text-xl font-bold mb-4 gold-text">
+            チップなしでポーカーができる無料ツール
+          </h2>
+          <p className="mb-6 leading-relaxed text-sm">
+            物理的なポーカーチップがなくても大丈夫。トランプさえあれば、このチップ管理アプリがチップの代わりになります。テキサスホールデムのベット・ポット・ブラインドをリアルタイムで管理し、面倒な計算を自動化します。登録不要・インストール不要で今すぐ使えます。
+          </p>
+
+          <h2 className="text-xl font-bold mb-4 gold-text">
+            主な機能
+          </h2>
+          <ul className="space-y-2 mb-6 list-disc list-inside text-sm">
+            <li>2〜10人のプレイヤーに対応したチップ管理</li>
+            <li>フォールド・チェック・コール・レイズ・オールインに対応</li>
+            <li>サイドポットの自動計算</li>
+            <li>ブラインド（スモール・ビッグ）の管理と自動増加</li>
+            <li>6文字のコードで観戦者とリアルタイム共有</li>
+            <li>ゲーム進行状況をブラウザに自動保存</li>
+          </ul>
+
+          <h2 className="text-xl font-bold mb-4 gold-text">
+            よくある質問
+          </h2>
+          <div className="space-y-4 text-sm">
+            <div>
+              <h3 className="font-semibold casino-text-white mb-1">
+                チップなしでポーカーはできますか？
+              </h3>
+              <p className="leading-relaxed">
+                はい、このアプリがあればチップは不要です。スマートフォンやタブレットをテーブルに置いて、全員のチップ枚数をアプリで管理してください。トランプだけあればテキサスホールデムを楽しめます。
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold casino-text-white mb-1">
+                無料で使えますか？
+              </h3>
+              <p className="leading-relaxed">
+                完全無料です。アカウント登録も不要で、アプリのダウンロードも必要ありません。ブラウザで pokerchip.jp にアクセスするだけで使えます。
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold casino-text-white mb-1">
+                何人まで対応していますか？
+              </h3>
+              <p className="leading-relaxed">
+                2人から10人まで対応しています。ヘッズアップ（1対1）からフルリング（9〜10人）まで、どんな人数でもチップ管理ができます。
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* Footer Links */}
         <div className="mt-6 flex flex-wrap justify-center gap-4 text-white text-sm">
