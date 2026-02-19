@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGameStore } from '@/store/game-store';
 import { GameSettings } from '@/types/game-types';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function SetupScreen() {
@@ -82,56 +83,84 @@ export default function SetupScreen() {
       <div className="max-w-4xl mx-auto px-4 py-8">
 
         {/* Hero Section */}
-        <div className="text-center pt-4 pb-10">
-          {/* Suit icons row */}
-          <div className="flex justify-center items-center gap-4 mb-6">
-            <span className="text-3xl sm:text-4xl opacity-60">♠</span>
-            <span className="text-3xl sm:text-4xl text-red-500 opacity-60">♥</span>
-            <span className="text-3xl sm:text-4xl text-red-500 opacity-60">♦</span>
-            <span className="text-3xl sm:text-4xl opacity-60">♣</span>
+        <div className="relative text-center pt-4 pb-10 overflow-hidden rounded-xl">
+          {/* Background illustration */}
+          <div className="absolute inset-0 flex items-center justify-center" style={{ maskImage: 'radial-gradient(ellipse 80% 70% at center, black 40%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 80% 70% at center, black 40%, transparent 100%)' }}>
+            <Image
+              src="/toppage-bg.png"
+              alt=""
+              width={800}
+              height={340}
+              priority
+              className="w-full h-full object-cover opacity-30"
+            />
           </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"></div>
 
           {/* Main title */}
-          <h1 className="text-3xl sm:text-5xl font-bold casino-text-white mb-3 tracking-wide">
-            チップ不要・トランプだけで遊べる！
-          </h1>
-          <h2 className="text-2xl sm:text-3xl font-bold gold-text tracking-wider">
-            プレイ状況をカンタン管理
-          </h2>
+          <div className="relative z-10">
+            <h1 className="text-3xl sm:text-5xl font-bold casino-text-white mb-3 tracking-wide drop-shadow-lg">
+              チップ不要・トランプだけで遊べる！
+            </h1>
+            <h2 className="text-2xl sm:text-3xl font-bold gold-text tracking-wider drop-shadow-lg">
+              プレイ状況をカンタン管理
+            </h2>
 
-          {/* Decorative divider */}
-          <div className="flex items-center justify-center gap-3 mt-6">
-            <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-casino-gold opacity-60"></div>
-            <span className="text-casino-gold text-sm">POKER CHIP MANAGEMENT APP</span>
-            <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-casino-gold opacity-60"></div>
+            {/* Decorative divider */}
+            <div className="flex items-center justify-center gap-3 mt-6">
+              <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-casino-gold opacity-60"></div>
+              <span className="text-casino-gold text-sm">POKER CHIP MANAGEMENT APP</span>
+              <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-casino-gold opacity-60"></div>
+            </div>
+
+            {/* Subtitle */}
+            <p className="text-gray-400 text-sm sm:text-base mt-4">
+              カードは本物、チップはアプリで。本格テキサスホールデムを手軽に楽しもう。
+            </p>
           </div>
-
-          {/* Subtitle */}
-          <p className="text-gray-400 text-sm sm:text-base mt-4">
-            カードは本物、チップはアプリで。本格テキサスホールデムを手軽に楽しもう。
-          </p>
         </div>
 
-        {/* Navigation Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-8">
-          <Link
-            href="/how-to-play"
-            className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
-          >
-            使い方
-          </Link>
-          <Link
-            href="/rules"
-            className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
-          >
-            ポーカーのルール
-          </Link>
-          <Link
-            href="/faq"
-            className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
-          >
-            よくある質問
-          </Link>
+        {/* Characters + Navigation Buttons */}
+        <div className="relative mb-8">
+          {/* Left character (red chip mascot) */}
+          <Image
+            src="/character.png"
+            alt="ポーカーチップマスコット"
+            width={240}
+            height={240}
+            priority
+            className="absolute pointer-events-none select-none w-20 sm:w-32 md:w-44 lg:w-52 -left-2 sm:-left-4 md:-left-8 bottom-0 sm:bottom-[-1rem]"
+          />
+          {/* Right character (blue chip mascot) */}
+          <Image
+            src="/character2.png"
+            alt="ポーカーチップマスコット"
+            width={240}
+            height={240}
+            priority
+            className="absolute pointer-events-none select-none w-20 sm:w-32 md:w-44 lg:w-52 -right-2 sm:-right-4 md:-right-8 bottom-0 sm:bottom-[-1rem]"
+          />
+
+          <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 relative z-10 py-2">
+            <Link
+              href="/how-to-play"
+              className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
+            >
+              使い方
+            </Link>
+            <Link
+              href="/rules"
+              className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
+            >
+              ポーカーのルール
+            </Link>
+            <Link
+              href="/faq"
+              className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
+            >
+              よくある質問
+            </Link>
+          </div>
         </div>
 
         {/* Game Settings Form */}
