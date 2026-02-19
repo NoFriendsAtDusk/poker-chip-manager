@@ -120,65 +120,49 @@ export default function SetupScreen() {
           </div>
         </div>
 
-        {/* Characters — mobile: centered row, desktop: flanking buttons */}
-        <div className="flex justify-center items-end gap-6 mt-2 mb-2 sm:hidden">
+        {/* Characters + Navigation Buttons */}
+        <div className="flex items-center justify-center gap-1 sm:gap-0 mb-8 relative">
+          {/* Left character */}
           <Image
             src="/character.png"
             alt="ポーカーチップマスコット"
             width={240}
             height={240}
             priority
-            className="w-24 h-auto object-contain"
-          />
-          <Image
-            src="/character2.png"
-            alt="ポーカーチップマスコット"
-            width={240}
-            height={240}
-            priority
-            className="w-24 h-auto object-contain"
-          />
-        </div>
-
-        {/* Navigation Buttons (with flanking characters on sm+) */}
-        <div className="relative mb-8">
-          {/* Left character — desktop only */}
-          <Image
-            src="/character.png"
-            alt="ポーカーチップマスコット"
-            width={240}
-            height={240}
-            className="hidden sm:block absolute pointer-events-none select-none sm:w-32 md:w-44 lg:w-52 -left-4 md:-left-8 bottom-0 sm:bottom-[-1rem]"
-          />
-          {/* Right character — desktop only */}
-          <Image
-            src="/character2.png"
-            alt="ポーカーチップマスコット"
-            width={240}
-            height={240}
-            className="hidden sm:block absolute pointer-events-none select-none sm:w-32 md:w-44 lg:w-52 -right-4 md:-right-8 bottom-0 sm:bottom-[-1rem]"
+            className="w-16 sm:w-32 md:w-44 lg:w-52 h-auto object-contain flex-shrink-0 sm:absolute sm:pointer-events-none sm:select-none sm:-left-4 md:-left-8 sm:bottom-[-1rem]"
           />
 
-          <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 relative z-10 py-2">
+          {/* Buttons */}
+          <div className="flex flex-row justify-center gap-1.5 sm:gap-4 relative z-10 py-2">
             <Link
               href="/how-to-play"
-              className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
+              className="px-2 py-2 sm:px-6 sm:py-2.5 glass-card gold-text font-semibold text-xs sm:text-base rounded-lg hover:bg-white/10 transition-all text-center"
             >
               使い方
             </Link>
             <Link
               href="/rules"
-              className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
+              className="px-2 py-2 sm:px-6 sm:py-2.5 glass-card gold-text font-semibold text-xs sm:text-base rounded-lg hover:bg-white/10 transition-all text-center"
             >
-              ポーカーのルール
+              ルール
             </Link>
             <Link
               href="/faq"
-              className="px-6 py-2.5 glass-card gold-text font-semibold rounded-lg hover:bg-white/10 transition-all text-center"
+              className="px-2 py-2 sm:px-6 sm:py-2.5 glass-card gold-text font-semibold text-xs sm:text-base rounded-lg hover:bg-white/10 transition-all text-center"
             >
-              よくある質問
+              FAQ
             </Link>
           </div>
+
+          {/* Right character */}
+          <Image
+            src="/character2.png"
+            alt="ポーカーチップマスコット"
+            width={240}
+            height={240}
+            priority
+            className="w-16 sm:w-32 md:w-44 lg:w-52 h-auto object-contain flex-shrink-0 sm:absolute sm:pointer-events-none sm:select-none sm:-right-4 md:-right-8 sm:bottom-[-1rem]"
+          />
         </div>
 
         {/* Game Settings Form */}

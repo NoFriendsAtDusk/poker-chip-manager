@@ -40,6 +40,10 @@ export const metadata: Metadata = {
     title: "ポーカーチップ管理 | チップなし・トランプだけ",
     description: "チップなしでポーカーができる無料Webアプリ。登録不要。",
   },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
   robots: {
     index: true,
     follow: true,
