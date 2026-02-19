@@ -123,7 +123,7 @@ export default function ShowdownPanel({ gameState }: ShowdownPanelProps) {
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
-        className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 max-h-[30vh] overflow-y-auto"
+        className="space-y-2 sm:space-y-3 mb-4 sm:mb-6"
       >
         {currentEligiblePlayers.map(player => (
           <motion.button

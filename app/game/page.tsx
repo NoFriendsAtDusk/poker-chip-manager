@@ -64,7 +64,7 @@ export default function GameScreen() {
       </div>
 
       {/* Bottom dock — undo + action/showdown/gameover panels */}
-      <div className="flex-shrink-0 px-2 pb-2 sm:px-4 sm:pb-4 z-30">
+      <div className="min-h-0 overflow-y-auto px-2 pb-2 sm:px-4 sm:pb-4 z-30">
         {/* Undo button */}
         <AnimatePresence>
           {isPlayPhase && (
